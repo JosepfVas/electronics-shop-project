@@ -1,4 +1,6 @@
 import csv
+
+
 class Item:
     pay_rate = 1.0
     all = []
