@@ -25,4 +25,9 @@ def test_string_to_number(test_numbers):
     expected_result = [1, 2, 3]
     assert expected_result
 
+def test___repr__(test_item):
+    assert f'("{test_item.name}", {test_item.price}, {test_item.quantity})'
+
+def test___str__(test_item):
+    assert f'{test_item.name}'
 
