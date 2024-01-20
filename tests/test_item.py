@@ -31,3 +31,8 @@ def test___repr__(test_item):
 def test___str__(test_item):
     assert f'{test_item.name}'
 
+def test___add__(test_item):
+    other = Item("Other Item", 50, 2)
+    result = test_item + other
+    assert result == test_item.quantity + other.quantity
+
