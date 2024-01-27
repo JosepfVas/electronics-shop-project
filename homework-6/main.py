@@ -10,3 +10,4 @@ if __name__ == '__main__':
     # В файле items.csv удалена последняя колонка.
     Item.instantiate_from_csv(DAMAGED_FILE_PATH)
     # InstantiateCSVError: Файл item.csv поврежден
+
