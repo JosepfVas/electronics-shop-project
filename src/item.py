@@ -1,6 +1,10 @@
 import csv
 
 
+class InstantiateCSVError(Exception):
+    pass
+
+
 class Item:
     pay_rate = 1.0
     all = []
@@ -35,15 +39,25 @@ class Item:
         return int(float(number))
 
     @classmethod
-    def instantiate_from_csv(cls, scv_file):
+    def instantiate_from_csv(cls, csv_file):
         cls.all.clear()
-        with open(scv_file, mode='r', encoding='utf-8') as file:
-            reader = csv.DictReader(file)
-            for row in reader:
-                name = str(row['name'])
-                price = int(row['price'])
-                quantity = int(row['quantity'])
-                cls(name, price, quantity)
+        try:
+            with open(csv_file, mode='r', encoding='utf-8') as file:
+                reader = csv.DictReader(file)
+
+                for row in reader:
+                    if 'name' not in row or 'price' not in row or 'quantity' not in row:
+                        raise KeyError
+
+                    name = str(row['name'])
+                    price = int(row['price'])
+                    quantity = int(row['quantity'])
+                    cls(name, price, quantity)
+
+        except FileNotFoundError:
+            raise FileNotFoundError("Отсутствует файл item.csv")
+        except KeyError:
+            raise InstantiateCSVError("Файл поврежден")
 
     def __repr__(self):
         return f'{self.__class__.__name__}("{self.__name}", {self.price}, {self.quantity})'
