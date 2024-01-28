@@ -11,3 +11,7 @@ if __name__ == '__main__':
     Item.instantiate_from_csv(DAMAGED_FILE_PATH)
     # InstantiateCSVError: Файл item.csv поврежден
 
+
+
+
+

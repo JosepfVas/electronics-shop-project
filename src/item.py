@@ -47,12 +47,14 @@ class Item:
 
                 for row in reader:
                     if 'name' not in row or 'price' not in row or 'quantity' not in row:
-                        raise KeyError
+                        raise InstantiateCSVError("Файл поврежден")
 
-                    name = str(row['name'])
-                    price = int(row['price'])
-                    quantity = int(row['quantity'])
-                    cls(name, price, quantity)
+                    else:
+                        name = str(row['name'])
+                        price = int(row['price'])
+                        quantity = int(row['quantity'])
+                        item = cls(name, price, quantity)
+                        cls.all.append(item)
 
         except FileNotFoundError:
             raise FileNotFoundError("Отсутствует файл item.csv")
